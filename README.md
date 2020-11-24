@@ -1,6 +1,13 @@
 ## Api angular-news-api
-Petite api nodejs pour le projet [angular-news](https://github.com/RisKiki/angular-news)
+API in NodeJs for project [angular-news](https://github.com/RisKiki/angular-news)
 
+## Routes 
+For all détails of request body, go see the documentation.
+
+| Method | Routes | Description |
+|--------|--------|-------------|
+| POST | articles/create | Create a new article |
+| GET | articles/byId | Get article with an id |
 ## Code HTTP 
 | Code | Français | Anglais |
 |------|----------|---------|
