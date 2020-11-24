@@ -29,24 +29,28 @@ router.post('/create', (req, res, next) => {
         article
         .save()
         .then(
-            (result) => {
-                sendSuccess(result, currentRoute, req, res);
-            }
+            (result) => sendSuccess(result, currentRoute, req, res)
         ).catch(
-            (err) => {
-                sendError(err,currentRoute, req, res);
-            }
+            (err) => sendError(err,currentRoute, req, res)
         );
     }    
 });
 
-router.get('/one', (req,res,next) => {
-    const check = checkBody(['articleId'], req)
+router.get('/byId', (req,res,next) => {
+    const check = checkBody(['id'], req)
+    const articleId = req.body.id;
 
     if (!check.valid) {
         sendMissingProperties(check, currentRoute, req, res);
     } else {
-        
+        Article.findById(articleId)
+        .exec()
+        .then(
+            (result) => sendSuccess(result, currentRoute, req, res)
+        )
+        .catch(
+            (err) => sendError(err,currentRoute, req, res)
+        )
     }
 })
 
