@@ -1,7 +1,12 @@
 const express   = require('express');
 const router    = express.Router();
 const mongoose  = require('mongoose');
-const checkBody = require('../config/tools');
+const {
+    checkBody,
+    sendMissingProperties,
+    sendSuccess,
+    sendError
+} = require('../config/tools');
 
 const Article = require('../models/article');
 
@@ -12,19 +17,7 @@ router.post('/create', (req, res, next) => {
     const check      = checkBody(properties,req);
 
     if (!check.valid){
-        res.status(520).json({
-            status: {
-                success: 0,
-                route  : req.method+' : '+currentRoute+'/'+req.path
-            },
-            error : {
-                status           : 5201,
-                message          : "There are missing properties in the request.",
-                propertiesMissing: check.empty
-            },
-            params : req.body,
-            data: {}
-        })
+        sendMissingProperties(check, currentRoute, req, res);
     } else {
         const article = new Article({
             _id        : new mongoose.Types.ObjectId(),
@@ -37,33 +30,24 @@ router.post('/create', (req, res, next) => {
         .save()
         .then(
             (result) => {
-                res.status(200).json({
-                    status: {
-                        success: 1,
-                        route  : req.method+' : '+currentRoute+'/'+req.path
-                    },
-                    data: {
-                        article
-                    },
-                    result
-                })
+                sendSuccess(result, currentRoute, req, res);
             }
         ).catch(
             (err) => {
-                res.status(500).json({
-                    status: {
-                        success: 0,
-                        route  : req.method+' : '+currentRoute+'/'+req.path
-                    },
-                    error: {
-                        status : error.status,
-                        message: error.message,
-                        error  : err,
-                    }
-                });
+                sendError(err,currentRoute, req, res);
             }
         );
     }    
 });
+
+router.get('/one', (req,res,next) => {
+    const check = checkBody(['articleId'], req)
+
+    if (!check.valid) {
+        sendMissingProperties(check, currentRoute, req, res);
+    } else {
+        
+    }
+})
 
 module.exports = router;
