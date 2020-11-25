@@ -52,6 +52,17 @@ router.get('/byId', (req,res,next) => {
             (err) => sendError(err,currentRoute, req, res)
         )
     }
+});
+
+router.get('/all', (req,res,next) => {
+    Article.find({})
+    .exec()
+    .then(
+        (result) => sendSuccess(result, currentRoute, req, res)
+    )
+    .catch(
+        (err) => sendError(err,currentRoute, req, res)
+    )
 })
 
 module.exports = router;
