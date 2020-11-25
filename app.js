@@ -34,6 +34,15 @@ app.use((req, res, next) => {
 
 app.use('/articles', articleRoutes);
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        'name' : 'angular-news-api',
+        'version' : '1.0.0',
+        'author' : "Disdier Alexandre",
+        'git' : 'https://github.com/RisKiki/angular-news-api'
+    });
+})
+
 app.use((req,res,next) => {
     const error  = new Error('Not Found');
     error.status = 404;
