@@ -6,7 +6,7 @@ const {
     sendMissingProperties,
     sendSuccess,
     sendError
-} = require('../config/tools');
+} = require('../tools/tools');
 
 const Article = require('../models/article');
 
