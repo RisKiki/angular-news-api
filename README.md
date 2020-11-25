@@ -1,6 +1,17 @@
 ## Api angular-news-api
 API in NodeJs for project [angular-news](https://github.com/RisKiki/angular-news)
 
+## Clone
+
+Run `git clone https://github.com/RisKiki/angular-news-api.git` to get the project.
+Run 
+``` bash 
+    npm install
+    npm start
+```
+
+Then go on (http://localhost:3000/)
+
 ## Routes 
 For all détails of request body, go see the documentation.
 
@@ -8,6 +19,7 @@ For all détails of request body, go see the documentation.
 |--------|--------|-------------|
 | POST | articles/create | Create a new article |
 | GET | articles/byId | Get article with an id |
+
 ## Code HTTP 
 | Code | Français | Anglais |
 |------|----------|---------|
