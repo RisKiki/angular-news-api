@@ -3,14 +3,14 @@ API in NodeJs for project [angular-news](https://github.com/RisKiki/angular-news
 
 ## Clone
 
-Run `git clone https://github.com/RisKiki/angular-news-api.git` to get the project.
+Run `git clone https://github.com/RisKiki/angular-news-api.git` to get the project. \
 Run 
 ``` bash 
     npm install
     npm start
 ```
 
-Then go on (http://localhost:3000/)
+Then go on http://localhost:3000/ to check if it's all work.
 
 ## Routes 
 For all détails of request body, go see the documentation.
