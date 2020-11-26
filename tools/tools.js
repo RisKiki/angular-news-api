@@ -1,11 +1,8 @@
 
 function checkBody(properties, req) {
-    emptyProp = [];
-    properties.forEach(prop => {
-        if (!req.body.hasOwnProperty(prop)) {
-            emptyProp.push(prop)
-        }
-    });
+    const emptyProp = properties.filter(prop => 
+        !req.body.hasOwnProperty(prop)
+    );
 
     return {
         valid : emptyProp.length === 0,

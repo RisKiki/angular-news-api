@@ -6,6 +6,8 @@ const mongoose   = require('mongoose')
 const config     = require('./config/config');
 
 const articleRoutes = require('./routes/articles')
+const userRoutes    = require('./routes/users')
+
 mongoose.connect(
     config.dburi,
     { 
@@ -33,6 +35,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/articles', articleRoutes);
+app.use('/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -44,7 +47,7 @@ app.get('/', (req, res) => {
 })
 
 app.use((req,res,next) => {
-    const error  = new Error('Not Found');
+    const error  = new Error('Route doesn\'t exist.');
     error.status = 404;
     next(error);
 });
