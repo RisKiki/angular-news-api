@@ -36,14 +36,14 @@ function sendSuccess(data, currentRoute, req, res) {
 }
 
 function sendError(err, currentRoute, req, res) {
-    res.status(500).json({
+    res.status(404).json({
         status: {
             success: 0,
             route  : req.method+' : '+currentRoute+req.path
         },
         error: {
-            status : error.status,
-            message: error.message,
+            status : err.status,
+            message: err.message,
             error  : err,
         }
     });

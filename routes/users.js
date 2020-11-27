@@ -49,7 +49,15 @@ router.post('/login', (req, res) => {
             password:req.body.password,
         })
         .then(
-            (result) => sendSuccess(result, currentRoute, req, res)
+            (result) => {
+                if (result){
+                    sendSuccess(result, currentRoute, req, res)
+                } else {
+                    const err = new Error('Password and login doesn\'t match.')
+                    err.status = 404;
+                    sendError(err,currentRoute, req, res)
+                }
+            }
         ).catch(
             (err) => sendError(err,currentRoute, req, res)
         );
