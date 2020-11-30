@@ -22,7 +22,7 @@ For all détails of request body, go see the documentation.
 | POST | users/login | Log-in for business | | |
 
 ## Code HTTP 
-| Code | Français | Anglais |
+| Code | Français | English |
 |------|----------|---------|
 | 200 | Requête exécutée avec succès. | Success.
 | 400 | Mauvaise requête. | Invalid request format.
