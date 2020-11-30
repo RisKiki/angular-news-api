@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
+    "start-prod" : "pm2 start server.js --name angular-news-api --log /home/ubuntu/logs/angular-news-api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
