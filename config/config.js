@@ -1,9 +1,9 @@
 var config = {
-    dbusername: "admin",
-    dbpassword: "M2EjNAdUb5mSTgy",
-    dbname    : "db1"
+    dbusername: process.env.DBUSERNAME,
+    dbpassword: process.env.DBPASSWORD,
+    dbname    : process.env.DBNAME,
+    dburi     : process.env.DBURI,
+    port      : process.env.PORT
 }
-
-config.dburi = "mongodb+srv://admin:"+config.dbpassword+"@angular-news.5hyda.mongodb.net/"+config.dbname+"?retryWrites=true&w=majority"
 
 module.exports = config;

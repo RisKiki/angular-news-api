@@ -1,5 +1,5 @@
 ## Api angular-news-api
-API in NodeJs for project [angular-news](https://github.com/RisKiki/angular-news)
+API in NodeJs for project [angular-news](https://github.com/RisKiki/angular-news). \
 
 ## Clone
 
