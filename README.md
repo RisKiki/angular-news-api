@@ -17,6 +17,9 @@ For all détails of request body, go see the documentation.
 |--------|--------|-------------|
 | POST | articles/create | Create a new article |
 | GET | articles/byId | Get article with an id |
+| GET | articles/all | Get all articles |
+| POST | users/create | Create a new user |
+| POST | users/login | Log-in for business |
 
 ## Code HTTP 
 | Code | Français | Anglais |
