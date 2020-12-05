@@ -12,7 +12,7 @@ const Article = require('../models/article');
 
 const currentRoute = "articles";
 
-router.post('/create', (req, res, next) => {
+router.post('/create', (req, res) => {
     const properties = ['title','description','image']
     const check      = checkBody(properties,req);
 
@@ -36,7 +36,7 @@ router.post('/create', (req, res, next) => {
     }    
 });
 
-router.get('/byId', (req,res,next) => {
+router.get('/byId', (req,res) => {
     const check = checkBody(['id'], req)
     const articleId = req.body.id;
 
@@ -54,7 +54,7 @@ router.get('/byId', (req,res,next) => {
     }
 });
 
-router.get('/all', (req,res,next) => {
+router.get('/all', (req,res) => {
     Article.find({})
     .exec()
     .then(

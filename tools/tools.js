@@ -26,6 +26,16 @@ function sendMissingProperties(check, currentRoute, req, res) {
 };
 
 function sendSuccess(data, currentRoute, req, res) {
+    console.log({
+        status: {
+            success: 1,
+            route  : req.method+' : '+currentRoute+req.path
+        },
+        params : req.params,
+        body : req.body,
+        toekn : req.headers.authorization,
+        data: data
+    })
     res.status(200).json({
         status: {
             success: 1,
@@ -36,6 +46,20 @@ function sendSuccess(data, currentRoute, req, res) {
 }
 
 function sendError(err, currentRoute, req, res) {
+    console.log({
+        status: {
+            success: 0,
+            route  : req.method+' : '+currentRoute+req.path
+        },
+        params : req.params,
+        body : req.body,
+        toekn : req.headers.authorization,
+        error: {
+            status : err.status,
+            message: err.message,
+            error  : err,
+        }
+    })
     res.status(404).json({
         status: {
             success: 0,

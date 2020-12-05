@@ -4,10 +4,13 @@ const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose')
 const config     = require('./config/config');
+const auth       = require('./middleware/auth');
 
+// Import routes
 const articleRoutes = require('./routes/articles')
 const userRoutes    = require('./routes/users')
 
+// Set up Mongo DB
 mongoose.connect(
     config.dburi,
     { 
@@ -15,16 +18,16 @@ mongoose.connect(
         useUnifiedTopology: true
     }
 );
-
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
-
+// Add morgan & parser
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Set Up CRUD
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin','*'),
     res.header(
@@ -38,7 +41,8 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/articles', articleRoutes);
+// Routes
+app.use('/articles',auth, articleRoutes);
 app.use('/users', userRoutes);
 
 app.get('/', (req, res) => {
