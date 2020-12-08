@@ -33,7 +33,7 @@ function sendSuccess(data, currentRoute, req, res) {
         },
         params : req.params,
         body : req.body,
-        toekn : req.headers.authorization,
+        token : req.headers.authorization,
         data: data
     })
     res.status(200).json({
@@ -53,7 +53,7 @@ function sendError(err, currentRoute, req, res) {
         },
         params : req.params,
         body : req.body,
-        toekn : req.headers.authorization,
+        token : req.headers.authorization,
         error: {
             status : err.status,
             message: err.message,

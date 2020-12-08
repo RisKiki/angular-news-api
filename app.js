@@ -7,8 +7,10 @@ const config     = require('./config/config');
 const auth       = require('./middleware/auth');
 
 // Import routes
-const articleRoutes = require('./routes/articles')
-const userRoutes    = require('./routes/users')
+const articleRoutes  = require('./routes/articles');
+const userRoutes     = require('./routes/users');
+const loginRoutes    = require('./routes/login');
+const registerRoutes = require('./routes/register');
 
 // Set up Mongo DB
 mongoose.connect(
@@ -42,8 +44,10 @@ app.use((req, res, next) => {
 })
 
 // Routes
-app.use('/articles',auth, articleRoutes);
-app.use('/users', auth, userRoutes);
+app.use('/articles', auth, articleRoutes);
+app.use('/users',    auth, userRoutes);
+app.use('/register', auth, registerRoutes);
+app.use('/login', loginRoutes);
 
 app.get('/', (req, res) => {
     res.status(200).json({
