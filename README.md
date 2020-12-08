@@ -19,7 +19,8 @@ For all détails of request body, go see the documentation.
 | GET | articles/byId | Get article with an id | | |
 | GET | articles/all | Get all articles | None | |
 | POST | users/create | Create a new user | | |
-| POST | users/login | Log-in for business | | |
+| POST | users/login | Login for business | | |
+| POST | /login | Login for app | | |
 
 ## Code HTTP 
 | Code | Français | English |
