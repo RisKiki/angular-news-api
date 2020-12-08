@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/articles',auth, articleRoutes);
-app.use('/users', userRoutes);
+app.use('/users', auth, userRoutes);
 
 app.get('/', (req, res) => {
     res.status(200).json({

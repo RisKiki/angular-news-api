@@ -8,9 +8,6 @@ const {
     sendError
 } = require('../tools/tools');
 
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
 const User = require('../models/user');
 const config = require('../config/config');
 
@@ -23,29 +20,25 @@ router.post('/create', (req, res) => {
     if (!check.valid) {
         sendMissingProperties(check,currentRoute,req,res)
     } else {
-        bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            const user = new User({
-                _id     : new mongoose.Types.ObjectId(),
-                name    : req.body.name,
-                email   : req.body.email,
-                password: hash,
-            })
-
-            user
-            .save()
-            .then(
-                (result) => sendSuccess(
-                    {
-                        _id  : result._id,
-                        email: result.email,
-                        name : result.name,
-                    }, currentRoute, req, res)
-            ).catch(
-                (err) => sendError(err,currentRoute, req, res)
-            );
+        const user = new User({
+            _id     : new mongoose.Types.ObjectId(),
+            name    : req.body.name,
+            email   : req.body.email,
+            password: req.body.password,
         })
-        .catch(error => res.status(500).json({ error }));
+
+        user
+        .save()
+        .then(
+            (result) => sendSuccess(
+                {
+                    _id  : result._id,
+                    email: result.email,
+                    name : result.name,
+                }, currentRoute, req, res)
+        ).catch(
+            (err) => sendError(err,currentRoute, req, res)
+        );
     }
 })
 
@@ -67,24 +60,13 @@ router.post('/login', (req, res) => {
                     err.status = 401;
                     sendError(err,currentRoute, req, res)
                 } else {
-                    bcrypt.compare(req.body.password, user.password)
-                    .then(
-                        (valid) => {
-                            if (!valid) {
-                                const err = new Error('Password does not match.');
-                                err.status = 401;
-                                sendError(err,currentRoute, req, res)
-                            } else {
-                                const data = {
-                                    token: jwt.sign(
-                                        { userId: user._id },
-                                        config.secretToken
-                                    )
-                                }
-                                sendSuccess(data, currentRoute, req, res)
-                            }
-                        }
-                    )
+                    if (user.password !== req.body.password) {
+                        const err = new Error('Password does not match.');
+                        err.status = 401;
+                        sendError(err,currentRoute, req, res)
+                    } else {
+                        sendSuccess(user, currentRoute, req, res)
+                    }
                 }
             }
         ).catch(
