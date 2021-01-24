@@ -51,10 +51,6 @@ router.post('/update', (req, res) => {
             image      : req.body.image
         }
 
-        console.log(
-            filter,
-            update
-        )
         Article.updateOne(filter,update)
         .then(
             (result) => sendSuccess(result, currentRoute, req, res)
