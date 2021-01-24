@@ -36,6 +36,34 @@ router.post('/create', (req, res) => {
     }    
 });
 
+router.post('/update', (req, res) => {
+    const properties = ['id','title','description','image']
+    const check      = checkBody(properties,req);
+
+    if (!check.valid){
+        sendMissingProperties(check, currentRoute, req, res);
+    } else {
+
+        const filter = { _id : req.body.id }
+        const update = { 
+            title      : req.body.title,
+            description: req.body.description,
+            image      : req.body.image
+        }
+
+        console.log(
+            filter,
+            update
+        )
+        Article.updateOne(filter,update)
+        .then(
+            (result) => sendSuccess(result, currentRoute, req, res)
+        ).catch(
+            (err) => sendError(err,currentRoute, req, res)
+        );
+    }    
+});
+
 router.get('/byId', (req,res) => {
     const check = checkBody(['id'], req)
     const articleId = req.body.id;
